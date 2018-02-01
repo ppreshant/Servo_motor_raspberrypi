@@ -14,9 +14,9 @@ pwm = PWM(0x40)
 
 PWMFreq = 50    # # Set frequency to 50 Hz ¬ 20 msec pulse
 ##servoMin = 4095 * PWMFreq/1000  # Min pulse length out of 4096 ¬ 1 msec
-servoMin = 100
+servoMin = 170
 ##servoMax = 2*servoMin  # Max pulse length out of 4096 ¬ 2 msec
-servoMax = 800
+servoMax = 500
 pulse_increment = 5                      # 20 => increment in 9 degrees angle every iteration
 
 
@@ -34,11 +34,9 @@ pwm.setPWMFreq(PWMFreq)                        # Set frequency to 50 Hz ¬ 10 ms
 ##setServoPulse(0,2)
 ##setServoPulse(3,2)
 
-##pwm.setPWM(0, 0, servoMax)                 # set angle at zero - pulse width = 1 msec
-##pwm.setPWM(2, 0, servoMax)
+pwm.setAllPWM(0, servoMax)                 # set angle at zero - pulse width = 1 msec
 
-
-##time.sleep(1)
+time.sleep(2)
 tinit = time.time()
 
 i = 0
@@ -47,7 +45,7 @@ servoset2 = servoMax
 
 while (max(servoset1,servoset2) > servoMin):
   # Change speed of continuous servo on channel O
-  servoset1 = servoMax - i * pulse_increment/2
+  servoset1 = servoMax - i * pulse_increment/1
   servoset2 = servoMax - i * pulse_increment/2 
   
   pwm.setPWM(0, 0, servoset1)
