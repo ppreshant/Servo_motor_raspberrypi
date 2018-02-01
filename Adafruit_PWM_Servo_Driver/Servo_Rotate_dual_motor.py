@@ -44,13 +44,13 @@ servoset2 = servoMax
 
 while (max(servoset1,servoset2) > servoMin):
   # Change speed of continuous servo on channel O
-  servoset1 = servoMax - i * pulse_increment/1
-  servoset2 = servoMax - i * pulse_increment/20 
+  servoset1 = max(servoMax - i * pulse_increment/1,servoMin)
+  servoset2 = max(servoMax - i * pulse_increment/35,servoMin) 
   
   pwm.setPWM(0, 0, servoset1)
   pwm.setPWM(2, 0, servoset2)
   
-  time.sleep(.02)
+  time.sleep(.0001)
   i = i + 1
 
 
