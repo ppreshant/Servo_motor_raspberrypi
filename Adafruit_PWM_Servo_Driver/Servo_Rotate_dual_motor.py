@@ -15,9 +15,8 @@ pwm = PWM(0x40)
 PWMFreq = 50    # # Set frequency to 50 Hz ¬ 20 msec pulse
 ##servoMin = 4095 * PWMFreq/1000  # Min pulse length out of 4096 ¬ 1 msec
 servoMin = 170
-##servoMax = 2*servoMin  # Max pulse length out of 4096 ¬ 2 msec
-servoMax = 500
-pulse_increment = 5                      # 20 => increment in 9 degrees angle every iteration
+servoMax = 500    # Range between min and max covers 1.8 ml in 3 ml syringe
+pulse_increment = 1                      # 20 => increment in 9 degrees angle every iteration
 
 
 def setServoPulse(channel, pulse):
@@ -46,7 +45,7 @@ servoset2 = servoMax
 while (max(servoset1,servoset2) > servoMin):
   # Change speed of continuous servo on channel O
   servoset1 = servoMax - i * pulse_increment/1
-  servoset2 = servoMax - i * pulse_increment/2 
+  servoset2 = servoMax - i * pulse_increment/20 
   
   pwm.setPWM(0, 0, servoset1)
   pwm.setPWM(2, 0, servoset2)
